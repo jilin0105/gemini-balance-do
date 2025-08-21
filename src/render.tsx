@@ -3,9 +3,7 @@ import { jsx } from 'hono/jsx';
 export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: boolean; showWarning: boolean }) => {
 	if (!isAuthenticated) {
 		return (
-			
-
-<html>
+			<html>
 				<head>
 					<meta charset="UTF-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -67,16 +65,11 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 					</script>
 				</body>
 			</html>
-
-
-
 		);
 	}
 
 	return (
-		
-
-<html>
+		<html>
 			<head>
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -319,7 +312,6 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 									return;
 								}
 
-								// 使用 + 操作符进行字符串拼接
 								if (!confirm('确定要删除选中的 ' + selectedKeys.length + ' 个密钥吗？')) {
 									return;
 								}
@@ -337,7 +329,6 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 										updateDeleteButtonVisibility();
 										selectAllCheckbox.checked = false;
 									} else {
-										// 使用 + 操作符拼接错误信息
 										alert('删除密钥失败: ' + (result.error || '未知错误'));
 									}
 								} catch (error) {
@@ -361,7 +352,6 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 									if (!response.ok) throw new Error('Failed to check keys');
 									const results = await response.json();
 									results.forEach(result => {
-										// 使用 + 操作符拼接 CSS 选择器
 										const row = keysTableBody.querySelector('tr[data-key="' + result.key + '"]');
 										if (row) {
 											const statusCell = row.querySelector('.status-cell');
@@ -388,7 +378,7 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 									const response = await fetch('/api/keys', {
 										method: 'POST',
 										headers: { 'Content-Type': 'application/json' },
-										body: JSON.stringify({ keys }),
+										body: JSON.JSON.stringify({ keys }),
 									});
 									const result = await response.json();
 									if (response.ok) {
@@ -412,7 +402,5 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 				</script>
 			</body>
 		</html>
-
-
 	);
 };
