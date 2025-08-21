@@ -3,7 +3,8 @@ import { jsx } from 'hono/jsx';
 export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: boolean; showWarning: boolean }) => {
 	if (!isAuthenticated) {
 		return (
-			<html>
+			
+<html>
 				<head>
 					<meta charset="UTF-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -65,11 +66,13 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 					</script>
 				</body>
 			</html>
+
 		);
 	}
 
 	return (
-		<html>
+		
+<html>
 			<head>
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -386,5 +389,6 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 				</script>
 			</body>
 		</html>
+
 	);
 };
