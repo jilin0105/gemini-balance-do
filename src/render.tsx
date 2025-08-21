@@ -69,11 +69,13 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 			</html>
 
 
+
 		);
 	}
 
 	return (
 		
+
 <html>
 			<head>
 				<meta charset="UTF-8" />
@@ -359,7 +361,8 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 									if (!response.ok) throw new Error('Failed to check keys');
 									const results = await response.json();
 									results.forEach(result => {
-										const row = keysTableBody.querySelector(`tr[data-key="${result.key}"]`);
+										// 使用 + 操作符拼接 CSS 选择器
+										const row = keysTableBody.querySelector('tr[data-key="' + result.key + '"]');
 										if (row) {
 											const statusCell = row.querySelector('.status-cell');
 											if (statusCell) {
@@ -409,6 +412,7 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 				</script>
 			</body>
 		</html>
+
 
 	);
 };
