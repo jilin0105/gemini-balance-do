@@ -3,7 +3,9 @@ import { jsx } from 'hono/jsx';
 export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: boolean; showWarning: boolean }) => {
 	if (!isAuthenticated) {
 		return (
-			<html>
+			
+
+<html>
 				<head>
 					<meta charset="UTF-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -65,11 +67,14 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 					</script>
 				</body>
 			</html>
+
+
 		);
 	}
 
 	return (
-		<html>
+		
+<html>
 			<head>
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -312,7 +317,8 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 									return;
 								}
 
-								if (!confirm(`确定要删除选中的 ${selectedKeys.length} 个密钥吗？`)) {
+								// 使用 + 操作符进行字符串拼接
+								if (!confirm('确定要删除选中的 ' + selectedKeys.length + ' 个密钥吗？')) {
 									return;
 								}
 
@@ -329,7 +335,8 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 										updateDeleteButtonVisibility();
 										selectAllCheckbox.checked = false;
 									} else {
-										alert(`删除密钥失败: ${result.error || '未知错误'}`);
+										// 使用 + 操作符拼接错误信息
+										alert('删除密钥失败: ' + (result.error || '未知错误'));
 									}
 								} catch (error) {
 									alert('请求失败，请检查网络连接。');
@@ -386,7 +393,7 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 										apiKeysTextarea.value = '';
 										fetchAndRenderKeys();
 									} else {
-										alert(`添加密钥失败: ${result.error || '未知错误'}`);
+										alert('添加密钥失败: ' + (result.error || '未知错误'));
 									}
 								} catch (error) {
 									alert('请求失败，请检查网络连接。');
@@ -402,5 +409,6 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 				</script>
 			</body>
 		</html>
+
 	);
 };
