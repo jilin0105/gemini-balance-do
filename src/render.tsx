@@ -3,8 +3,7 @@ import { jsx } from 'hono/jsx';
 export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: boolean; showWarning: boolean }) => {
 	if (!isAuthenticated) {
 		return (
-			
-<html>
+			<html>
 				<head>
 					<meta charset="UTF-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -66,13 +65,11 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 					</script>
 				</body>
 			</html>
-
 		);
 	}
 
 	return (
-		
-<html>
+		<html>
 			<head>
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -245,28 +242,44 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 							const fetchAndRenderKeys = async () => {
 								keysTableBody.innerHTML = '<tr><td colspan="3" class="p-2 text-center">加载中...</td></tr>';
 								try {
-								  const response = await fetch('/api/keys');
-								  if (!response.ok) throw new Error('Failed to fetch keys');
-								  const { keys } = await response.json();
-								  keysTableBody.innerHTML = '';
-								  if (keys && keys.length === 0) {
-								    keysTableBody.innerHTML = '<tr><td colspan="3" class="p-2 text-center">暂无密钥</td></tr>';
-								  } else if (keys) {
-								    keys.forEach(key => {
-								      const row = document.createElement('tr');
-								      row.dataset.key = key;
-								      // 修复了 class 和 data-key 的拼接语法
-								      row.innerHTML = `
-								        <td class="p-2 w-6"><input type="checkbox" class="key-checkbox form-checkbox h-4 w-4 text-blue-600" data-key="${key}" /></td>
-								        <td class="p-2 font-mono">${key}</td>
-								        <td class="p-2 status-cell">未知</td>
-								      `;
-								      keysTableBody.appendChild(row);
-								    });
-								  }
+									const response = await fetch('/api/keys');
+									if (!response.ok) throw new Error('Failed to fetch keys');
+									const { keys } = await response.json();
+									keysTableBody.innerHTML = ''; // 清空加载信息
+
+									if (!keys || keys.length === 0) {
+										keysTableBody.innerHTML = '<tr><td colspan="3" class="p-2 text-center">暂无密钥</td></tr>';
+									} else {
+										keys.forEach(key => {
+											const row = document.createElement('tr');
+											row.dataset.key = key;
+
+											// 创建单元格 (td)
+											const checkboxCell = document.createElement('td');
+											checkboxCell.className = 'p-2 w-6';
+											const checkboxInput = document.createElement('input');
+											checkboxInput.type = 'checkbox';
+											checkboxInput.className = 'key-checkbox form-checkbox h-4 w-4 text-blue-600';
+											checkboxInput.dataset.key = key;
+											checkboxCell.appendChild(checkboxInput);
+											row.appendChild(checkboxCell);
+
+											const keyCell = document.createElement('td');
+											keyCell.className = 'p-2 font-mono';
+											keyCell.textContent = key;
+											row.appendChild(keyCell);
+
+											const statusCell = document.createElement('td');
+											statusCell.className = 'p-2 status-cell';
+											statusCell.textContent = '未知';
+											row.appendChild(statusCell);
+
+											keysTableBody.appendChild(row);
+										});
+									}
 								} catch (error) {
-								  keysTableBody.innerHTML = '<tr><td colspan="3" class="p-2 text-center text-red-500">加载失败</td></tr>';
-								  console.error('Failed to fetch keys:', error);
+									keysTableBody.innerHTML = '<tr><td colspan="3" class="p-2 text-center text-red-500">加载失败</td></tr>';
+									console.error('Failed to fetch keys:', error);
 								}
 							};
 
@@ -389,6 +402,5 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 				</script>
 			</body>
 		</html>
-
 	);
 };
