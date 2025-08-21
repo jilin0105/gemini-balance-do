@@ -11,19 +11,18 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 					<script src="https://cdn.tailwindcss.com"></script>
 					<style>
 						{`
-							/* 隐藏滚动条 */
 							body::-webkit-scrollbar {
 								display: none;
 							}
 							body {
-								-ms-overflow-style: none;  /* IE and Edge */
-								scrollbar-width: none;  /* Firefox */
+								-ms-overflow-style: none;
+								scrollbar-width: none;
 							}
 						`}
 					</style>
 				</head>
-				<body class="bg-gray-100 flex items-center justify-center h-screen p-4"> {/* 增加 p-4 避免内容紧贴边缘 */}
-					<div class="w-full max-w-sm /* 调整最大宽度以适应竖屏 */">
+				<body class="bg-gray-100 flex items-center justify-center h-screen p-4">
+					<div class="w-full max-w-sm">
 						<form id="login-form" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 							<div class="mb-4">
 								<label class="block text-gray-700 text-sm font-bold mb-2" for="auth-key">
@@ -38,7 +37,7 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 							</div>
 							<div class="flex items-center justify-between">
 								<button
-									class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" /* 按钮全宽 */
+									class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
 									type="submit"
 								>
 									登录
@@ -78,30 +77,26 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 				<script src="https://cdn.tailwindcss.com"></script>
 				<style>
 					{`
-						/* 隐藏滚动条 */
 						body::-webkit-scrollbar {
 							display: none;
 						}
 						body {
-							-ms-overflow-style: none;  /* IE and Edge */
-							scrollbar-width: none;  /* Firefox */
+							-ms-overflow-style: none;
+							scrollbar-width: none;
 						}
-						/* 侧边栏的默认隐藏状态 */
 						.sidebar-hidden {
 							transform: translateX(-100%);
 						}
-						/* 侧边栏显示状态 */
 						.sidebar-visible {
 							transform: translateX(0);
 						}
-						/* 覆盖层 */
 						.overlay {
 							background-color: rgba(0, 0, 0, 0.5);
 						}
 					`}
 				</style>
 			</head>
-			<body class="bg-gray-100 font-sans antialiased"> {/* 添加 font-sans 和 antialiased */}
+			<body class="bg-gray-100 font-sans antialiased">
 				{showWarning && (
 					<div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-3 mb-4" role="alert">
 						<strong class="font-bold">安全警告：</strong>
@@ -110,47 +105,40 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 						</span>
 					</div>
 				)}
-				{/* 主容器，竖屏时堆叠，横屏时并排 */}
 				<div class="flex flex-col md:flex-row min-h-screen">
-					{/* 汉堡菜单按钮 (仅在小屏幕显示) */}
 					<button
 						id="hamburger-btn"
-						class="md:hidden p-4 bg-gray-800 text-white focus:outline-none fixed top-0 left-0 w-16 z-30" /* 固定在顶部左侧 */
+						class="md:hidden p-4 bg-gray-800 text-white focus:outline-none fixed top-0 left-0 w-16 z-30"
 					>
 						☰
 					</button>
 
-					{/* 侧边栏 */}
 					<div
 						id="sidebar"
-						class="w-64 bg-gray-800 text-white p-4 fixed md:relative left-0 top-0 h-full z-20 transition-transform duration-300 ease-in-out sidebar-hidden /* 初始隐藏 */ md:translate-x-0 /* md:flex 下不移动 */"
+						class="w-64 bg-gray-800 text-white p-4 fixed md:relative left-0 top-0 h-full z-20 transition-transform duration-300 ease-in-out sidebar-hidden md:translate-x-0"
 					>
-						<h1 class="text-2xl font-bold mb-8 text-center">管理面板</h1> {/* 居中文本 */}
+						<h1 class="text-2xl font-bold mb-8 text-center">管理面板</h1>
 						<nav>
-							<a href="#" class="block py-2 px-4 rounded hover:bg-gray-700"> {/* 移除背景色，避免与激活状态冲突 */}
+							<a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">
 								密钥管理
 							</a>
 						</nav>
 					</div>
 
-					{/* 覆盖层 (当侧边栏打开时) */}
 					<div
 						id="overlay"
-						class="fixed inset-0 z-10 bg-black opacity-0 invisible transition-opacity duration-300 ease-in-out md:hidden" /* 初始不可见 */
+						class="fixed inset-0 z-10 bg-black opacity-0 invisible transition-opacity duration-300 ease-in-out md:hidden"
 					></div>
 
-					{/* 主要内容区域 */}
-					<div class="flex-1 p-6 md:p-8 overflow-y-auto /* 在内容区域添加滚动 */ mt-16 md:mt-0 /* 调整 margin-top 以避免被汉堡按钮遮挡 */">
+					<div class="flex-1 p-6 md:p-8 overflow-y-auto mt-16 md:mt-0">
 						<h2 class="text-2xl md:text-3xl font-bold mb-6">Gemini API 密钥管理</h2>
-						{/* 调整为单列堆叠布局，所有屏幕宽度下都是单列 */}
 						<div class="grid grid-cols-1 gap-6 md:gap-8">
-							{/* 批量添加密钥 */}
 							<div class="bg-white p-6 rounded-lg shadow-md">
 								<h3 class="text-xl font-semibold mb-4">批量添加密钥</h3>
 								<form id="add-keys-form">
 									<textarea
 										id="api-keys"
-										class="w-full h-40 p-2 border rounded bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" /* 优化 textarea */
+										class="w-full h-40 p-2 border rounded bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
 										placeholder="请输入API密钥，每行一个"
 									></textarea>
 									<button type="submit" class="mt-4 w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200">
@@ -158,11 +146,10 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 									</button>
 								</form>
 							</div>
-							{/* 已存储的密钥 */}
 							<div class="bg-white p-6 rounded-lg shadow-md">
-								<div class="flex flex-col sm:flex-row justify-between items-center mb-4"> {/* 响应式布局 */}
+								<div class="flex flex-col sm:flex-row justify-between items-center mb-4">
 									<h3 class="text-xl font-semibold mb-2 sm:mb-0">已存储的密钥</h3>
-									<div class="flex space-x-2"> {/* 按钮间距 */}
+									<div class="flex space-x-2">
 										<button id="check-keys-btn" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-200">
 											一键检查
 										</button>
@@ -171,14 +158,14 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 										</button>
 									</div>
 								</div>
-								<div class="max-h-60 overflow-y-auto border rounded"> {/* 添加边框 */}
+								<div class="max-h-60 overflow-y-auto border rounded">
 									<table id="keys-table" class="w-full text-left">
 										<thead>
 											<tr class="border-b">
 												<th class="p-2 w-6">
-													<input type="checkbox" id="select-all-keys" class="form-checkbox h-4 w-4 text-blue-600" /> {/* Form checkbox style */}
+													<input type="checkbox" id="select-all-keys" class="form-checkbox h-4 w-4 text-blue-600" />
 												</th>
-												<th class="p-2 font-mono">API 密钥</th> {/* Mono font for keys */}
+												<th class="p-2 font-mono">API 密钥</th>
 												<th class="p-2">状态</th>
 											</tr>
 										</thead>
@@ -213,7 +200,6 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 							const deleteSelectedBtn = document.getElementById('delete-selected-keys-btn');
 							const checkKeysBtn = document.getElementById('check-keys-btn');
 
-							// 侧边栏切换逻辑
 							const toggleSidebar = () => {
 								const isHidden = sidebar.classList.contains('sidebar-hidden');
 								if (isHidden) {
@@ -221,24 +207,23 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 									sidebar.classList.add('sidebar-visible');
 									overlay.classList.remove('invisible', 'opacity-0');
 									overlay.classList.add('visible', 'opacity-100');
-									document.body.style.overflow = 'hidden'; // 阻止背景滚动
+									document.body.style.overflow = 'hidden';
 								} else {
 									sidebar.classList.remove('sidebar-visible');
 									sidebar.classList.add('sidebar-hidden');
 									overlay.classList.remove('visible', 'opacity-100');
 									overlay.classList.add('invisible', 'opacity-0');
-									document.body.style.overflow = ''; // 恢复背景滚动
+									document.body.style.overflow = '';
 								}
 							};
 
 							if (hamburgerBtn && sidebar && overlay) {
-								hamburgerButton.addEventListener('click', toggleSidebar);
+								hamburgerBtn.addEventListener('click', toggleSidebar);
 								overlay.addEventListener('click', toggleSidebar);
 							}
 
-							// 确保在屏幕尺寸改变时，侧边栏状态正确
 							const updateSidebarOnResize = () => {
-								if (window.innerWidth >= 768) { // md breakpoint
+								if (window.innerWidth >= 768) {
 									if (!sidebar.classList.contains('sidebar-hidden')) {
 										sidebar.classList.add('sidebar-hidden');
 										sidebar.classList.remove('sidebar-visible');
@@ -247,14 +232,13 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 										overlay.classList.add('invisible', 'opacity-0');
 										overlay.classList.remove('visible', 'opacity-100');
 									}
-									document.body.style.overflow = ''; // 确保md以上不锁定滚动
+									document.body.style.overflow = '';
 								}
 							};
 
 							window.addEventListener('resize', updateSidebarOnResize);
-							updateSidebarOnResize(); // 初始加载时调用
+							updateSidebarOnResize();
 
-							// 密钥列表加载和显示
 							const fetchAndRenderKeys = async () => {
 								keysTableBody.innerHTML = '<tr><td colspan="3" class="p-2 text-center">加载中...</td></tr>';
 								try {
@@ -268,6 +252,7 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 								    keys.forEach(key => {
 								      const row = document.createElement('tr');
 								      row.dataset.key = key;
+								      // 修复了 class 和 data-key 的拼接语法
 								      row.innerHTML = `
 								        <td class="p-2 w-6"><input type="checkbox" class="key-checkbox form-checkbox h-4 w-4 text-blue-600" data-key="${key}" /></td>
 								        <td class="p-2 font-mono">${key}</td>
@@ -282,13 +267,11 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 								}
 							};
 
-							// 更新删除按钮的可见性
 							const updateDeleteButtonVisibility = () => {
 								const selectedKeys = document.querySelectorAll('.key-checkbox:checked');
 								deleteSelectedBtn.classList.toggle('hidden', selectedKeys.length === 0);
 							};
 
-							// 全选/反选逻辑
 							selectAllCheckbox.addEventListener('change', () => {
 								const checkboxes = document.querySelectorAll('.key-checkbox');
 								checkboxes.forEach(checkbox => {
@@ -297,18 +280,15 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 								updateDeleteButtonVisibility();
 							});
 
-							// 密钥复选框选中时更新删除按钮
 							keysTableBody.addEventListener('change', (e) => {
 								if (e.target.classList.contains('key-checkbox')) {
 									updateDeleteButtonVisibility();
-									// 如果一个未选中的复选框导致全选被取消，则取消全选框
 									if (!e.target.checked && selectAllCheckbox.checked) {
 										selectAllCheckbox.checked = false;
 									}
 								}
 							});
 
-							// 删除选中密钥
 							deleteSelectedBtn.addEventListener('click', async () => {
 								const selectedKeys = Array.from(document.querySelectorAll('.key-checkbox:checked')).map(cb => cb.dataset.key);
 								if (selectedKeys.length === 0) {
@@ -341,7 +321,6 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 								}
 							});
 
-							// 检查密钥
 							checkKeysBtn.addEventListener('click', async () => {
 								const rows = keysTableBody.querySelectorAll('tr');
 								rows.forEach(row => {
@@ -372,7 +351,6 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 								}
 							});
 
-							// 添加密钥
 							addKeysForm.addEventListener('submit', async (e) => {
 								e.preventDefault();
 								const keys = apiKeysTextarea.value.split('\n').map(k => k.trim()).filter(k => k !== '');
@@ -400,10 +378,8 @@ export const Render = ({ isAuthenticated, showWarning }: { isAuthenticated: bool
 								}
 							});
 
-							// 刷新密钥列表
 							refreshKeysBtn.addEventListener('click', fetchAndRenderKeys);
 
-							// 初始加载
 							fetchAndRenderKeys();
 						});
 					`}
